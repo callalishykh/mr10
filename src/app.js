@@ -4,7 +4,7 @@ const PORT = 3300;
 const app = express();
 const students = [
   {
-    name: "Ali12312312323",
+    name: "Ali",
     marks: 34,
   },
   {
