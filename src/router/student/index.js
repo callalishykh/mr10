@@ -2,7 +2,11 @@ import { Router } from "express";
 import StudentController from "../../controller/student/index.js";
 
 const studentRouter = Router();
-studentRouter.get("/:cnic", StudentController.create);
+studentRouter.post("/", StudentController.create);
+studentRouter.get("/", StudentController.getAll);
+studentRouter.get("/:id", StudentController.getSingle);
+studentRouter.delete("/:id", StudentController.delete);
+studentRouter.put("/:id", StudentController.update);
 
 // studentRouter.get("/all", StudentController.create);
 // studentRouter.get("/single", StudentController.create);
