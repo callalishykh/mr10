@@ -1,7 +1,14 @@
 import express from "express";
 import allRoutes from "./router/index.js";
+import { connectDB } from "./db/config.js";
+import dbInit from "./db/init.js";
 const PORT = 3300;
 const app = express();
+connectDB();
+
+dbInit()
+  .then(() => console.log("DB synced"))
+  .catch((err) => console.log("Db not synced", err));
 const students = [
   {
     name: "Ali12312312323",
@@ -21,7 +28,7 @@ const students = [
     marks: 51,
   },
 ];
-// app.use(express.json());
+app.use(express.json());
 app.use("/", allRoutes);
 app.post("/", (req, res) => {
   return res.json({
