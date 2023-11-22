@@ -4,6 +4,7 @@ const sequelize = new Sequelize("test", "postgres", "password", {
   host: "localhost",
   port: 5432,
   dialect: "postgres",
+  logging: false,
 });
 
 export const connectDB = async () => {
