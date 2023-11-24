@@ -2,7 +2,7 @@ import categoryModel from "../../model/product/category.js";
 import categoryProductModel from "../../model/product/categoryProduct.js";
 import productModel from "../../model/product/product.js";
 import unitModel from "../../model/product/unit.js";
-
+import { Sequelize } from "sequelize";
 const ProductController = {
   create: async (req, res) => {
     // const unit = await unitModel.create({ name: "u2" });
@@ -51,11 +51,17 @@ const ProductController = {
     // const data = await productModel.findAll({
     //   include: [categoryModel],
     // });
-    const data = await categoryModel.findAll({
-      // include: [{ model: productModel, attributes: ["name"] }],
-      // include: [productModel],
-      include: productModel,
+    const data = await productModel.findAll({
+      include: {
+        model: unitModel,
+        where: {
+          name: "u2",
+        },
+      },
+      logging: true,
     });
+
+    // SELECT * FROM post WHERE authorId = 12 AND status = 'active';
 
     res.json({
       message: "product created",
