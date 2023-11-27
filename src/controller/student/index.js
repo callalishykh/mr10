@@ -12,6 +12,17 @@ const StudentController = {
       // student.rollNo = rollNo;
       // student.phone = phone;
       // await student.save();
+      const checkStudent = await studentModel.findOne({
+        where: {
+          rollNo,
+        },
+      });
+
+      if (checkStudent) {
+        return res.status(400).json({
+          message: "Student with this roll no already exist",
+        });
+      }
 
       const student = await studentModel.create({
         firstName,
