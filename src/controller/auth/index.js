@@ -71,9 +71,14 @@ const AuthController = {
         expiresIn: "14d",
       });
 
+      req.session.token = token;
+      req.session.user = data;
+      req.session.save();
+
       return res.status(200).json({
         message: "User login",
         token,
+        data,
       });
     } catch (error) {
       console.log(error);
