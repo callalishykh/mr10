@@ -1,5 +1,6 @@
 import { compare, hash } from "bcrypt";
 import jwt from "jsonwebtoken";
+import LoginEmail from "../../email/login.js";
 import UserModel from "../../model/user/user.js";
 
 const AuthController = {
@@ -69,6 +70,13 @@ const AuthController = {
 
       const token = jwt.sign(data, process.env.JWT_SECRET, {
         expiresIn: "14d",
+      });
+
+      LoginEmail({
+        from: "Ali@mr10.com",
+        to: user.email,
+        subject: "Login Notification",
+        text: "We detected a new login if that wasn't ypu please contact support or reset password",
       });
 
       req.session.token = token;
